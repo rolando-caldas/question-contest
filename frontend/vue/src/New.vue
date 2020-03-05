@@ -44,6 +44,10 @@
         <md-progress-spinner :md-diameter="100" :md-stroke="10" md-mode="indeterminate" v-if="creating"></md-progress-spinner>
       </md-step>
     </md-steppers>
+    <md-snackbar md-position="center" md-duration="2000" :md-active.sync="showSnackbar" md-persistent>
+      <span v-html="message"></span>
+      <md-button class="md-primary" @click="showSnackbar = false">OK!</md-button>
+    </md-snackbar>
   </div>
 </template>
 
@@ -55,13 +59,15 @@
     name: "New",
     data: () => ({
       id: uuid4(),
-      title: 'dfdf',
+      title: null,
       description: null,
       author: null,
       questions: [{question: '', options: ['', '', '', ''], valid: ''}],
       done: [false],
       active: 'question0',
-      creating: false
+      creating: false,
+      showSnackbar: false,
+      message : ''
     }),
     methods: {
       addNew() {
@@ -76,13 +82,28 @@
       },
       send() {
         this.creating = true;
-        axios.post('http://localhost:8082/contest'), {
+        axios.post('http://localhost:8082/contest', {
           id: this.id,
           title: this.title,
           author: this.author,
           description: this.description,
           questions: this.questions
-        }.then(response => (this.contests = response.data.data)).catch(error => (this.contests = error));
+        }).then(response => {this.success()}).catch(error => {this.error(error)});
+      },
+      success() {
+          this.id = uuid4();
+          this.title = null;
+          this.description = null;
+          this.author = null;
+          this.questions = [{question: '', options: ['', '', '', ''], valid: ''}];
+          this.done = [false];
+          this.active = 'question0';
+          this.creating = false;
+          this.message = 'Contest creada correctamente';
+          this.showSnackbar = true;
+      },
+      error(error) {
+        this.message = error;
       }
     }
   }

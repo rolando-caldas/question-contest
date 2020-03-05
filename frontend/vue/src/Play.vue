@@ -1,5 +1,17 @@
 <template>
-  <div>{{contest}}</div>
+  <div>
+    <div class="md-headline">{{contest._title}}</div>
+    <md-divider></md-divider>
+
+    <md-steppers md-vertical>
+      <md-step v-for="(question, questionIndex) in contest._questions" :id="'question' + questionIndex">
+        <md-subheader class="md-primary">{{question._question}}</md-subheader>
+        <div>
+          <md-radio v-for="(option, index) in question._options" v-model="radio[questionIndex]" :value="index"> {{ option }}</md-radio>
+        </div>
+      </md-step>
+    </md-steppers>
+  </div>
 </template>
 
 <script>
@@ -8,7 +20,7 @@
   export default {
     name: "Play",
     data: function() {
-      return {contest: null}
+      return {contest: null, radio:[]}
     },
     created: function () {
       console.log(this.$route.params.id);

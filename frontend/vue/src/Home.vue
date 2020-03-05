@@ -18,10 +18,10 @@
 
   export default {
     name: "home",
-    data: () => ({
-      contests: null
-    }),
-    created: () => {
+    data: () => {
+      return {contests: null}
+    },
+    created: function () {
       axios.get('http://localhost:8082/contest').then(response => (this.contests = response.data.data)).catch(error => (this.contests = error));
     }
   }

@@ -27,7 +27,7 @@ services:
     image: node:13.8.0-stretch
     command: ["tail", "-f", "/dev/null"]
     ports:
-      - "8084:8080"
+      - "8084:8084"
     volumes:
       - ./frontend/vue:/application
     environment:
