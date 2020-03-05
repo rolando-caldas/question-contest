@@ -38,7 +38,6 @@
     },
     methods: {
       menuVisibleChange: function() {
-        console.log("hola");
         this.menuVisible = !this.menuVisible;
       }
     }

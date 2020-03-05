@@ -16,14 +16,9 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {
-      path: '/contest',
-      name: 'contest',
-      component: Contest
-    },
-    {
       path: '/',
       name: 'home',
-      component: Home
+      component: Contest
     },
     { path: '/play/:id', name:'play', component: Play },
     { path: '/new', name:'new', component: New }
