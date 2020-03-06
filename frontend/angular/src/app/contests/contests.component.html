@@ -1,0 +1,12 @@
+<mat-list>
+  <mat-list-item *ngFor="let contest of contests">
+    <a routerLink="/play/{{contest._id}}">
+      <mat-icon matListIcon>home</mat-icon>
+      <h3 matLine>{{contest._title}}</h3>
+      <p matLine>
+        <span>{{contest._author}}</span>
+        <span>{{contest._description}}</span>
+      </p>
+    </a>
+  </mat-list-item>
+</mat-list>

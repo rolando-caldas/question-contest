@@ -36,6 +36,6 @@ services:
     image: node:13.8.0-stretch
     command: ["tail", "-f", "/dev/null"]
     ports:
-      - "8085:80"
+      - "4200:4200"
     volumes:
       - ./frontend/angular:/application
